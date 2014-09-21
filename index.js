@@ -35,8 +35,8 @@ mongoose.connection.on('error', function() {
  */
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'app/views'));
-//app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'app/views'));
+app.set('view engine', 'jade');
 
 app.use(compress());
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -76,11 +76,11 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
 app.use('/', routes);
 
 /// catch 404 and forward to error handler
-//app.use(function(req, res, next) {
-//    var err = new Error('Not Found');
-//    err.status = 404;
-//    next(err);
-//});
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
 /**
  * Error Handlers
@@ -88,24 +88,24 @@ app.use('/', routes);
 
 // development error handler
 // will print stacktrace
-//if (app.get('env') === 'development') {
-//    app.use(function(err, req, res, next) {
-//        res.status(err.status || 500);
-//        res.render('error', {
-//            message: err.message,
-//            error: err
-//        });
-//    });
-//}
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
 
 // production error handler
 // no stacktraces leaked to user
-//app.use(function(err, req, res, next) {
-//    res.status(err.status || 500);
-//    res.render('error', {
-//        message: err.message,
-//        error: {}
-//    });
-//});
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
 
 module.exports = app;

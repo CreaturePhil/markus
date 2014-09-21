@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+  .page-header
+    h1= title
+      small &nbsp;#{description}
+  .row
+    .col-md-4
+      ul.nav.nav-pills.nav-stacked
+        li(class=title==='Account'?'active':undefined)
+          a(href="/settings/account") Account
+            span.fa.fa-arrow-right.pull-right
+        li(class=title==='Password'?'active':undefined)
+          a(href="/settings/password") Password
+            span.fa.fa-arrow-right.pull-right
+    .col-md-8
+      if title === "Account"
+        form.form-horizontal(role="form" method="post")
+          input(type="hidden" name="_csrf" value=_csrf)
+          .form-group
+            label.col-sm-2.control-label Email
+            .col-sm-10
+              input.form-control(type="email" name="email" value="#{user.email}")
+          .form-group
+            label.col-sm-2.control-label Name
+            .col-sm-10
+              input.form-control(type="text" name="name" value="#{user.profile.name}")
+          .form-group
+            label.col-sm-2.control-label Location
+            .col-sm-10
+              input.form-control(type="text" name="location" value="#{user.profile.location}")
+          .form-group
+            label.col-sm-2.control-label Website
+            .col-sm-10
+              input.form-control(type="text" name="website" value="#{user.profile.website}")
+          .form-group
+            label.col-sm-2.control-label Gravatar
+            .col-sm-10
+              img(src="#{user.gravatar()}")
+          .form-group
+            .col-sm-offset-2.col-sm-4
+              button.btn.btn-primary(type="submit") Save Changes
+        hr
+        .space-bottom-20
+          a(href="/settings/delete") Delete my account
+      if title === 'Password'
+        form(role="form" method="post")
+          input(type="hidden" name="_csrf" value=_csrf)
+          .form-group
+            label New Password
+            input.form-control(type="password" name="password" required)
+          .form-group
+            label Confirm Password
+            input.form-control(type="password" name="confirmPassword" required)
+          .form-group
+            button.btn.btn-primary(type="submit") Save Changes
