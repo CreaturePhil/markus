@@ -16,6 +16,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 
+var routes = require('./config/routes');
+
 var app = express();
 
 /**
@@ -61,9 +63,7 @@ var day = hour * 24;
 var week = day * 7;
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
 
-app.get('/', function(req, res) {
-  res.send('Hello World!');
-});
+app.use('/', routes);
 
 /// catch 404 and forward to error handler
 //app.use(function(req, res, next) {
