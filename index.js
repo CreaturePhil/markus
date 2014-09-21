@@ -17,8 +17,18 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 
 var routes = require('./config/routes');
+var secrets = require('./config/secrets');
 
 var app = express();
+
+/**
+ * Connect to MongoDB.
+ */
+
+mongoose.connect(secrets.db);
+mongoose.connection.on('error', function() {
+  console.error('MongoDB Connection Error. Make sure MongoDB is running.');
+});
 
 /**
  * App configuration.
@@ -36,26 +46,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(methodOverride());
 app.use(cookieParser());
-//app.use(session({
-//  resave: true,
-//  saveUninitialized: true,
-//  secret: secrets.sessionSecret,
-//  store: new MongoStore({
-//    url: secrets.db,
-//    auto_reconnect: true
-//  })
-//}));
-//app.use(passport.initialize());
-//app.use(passport.session());
-//app.use(flash());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: secrets.sessionSecret,
+  store: new MongoStore({
+    url: secrets.db,
+    auto_reconnect: true
+  })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 // csrf whitelist
-//var csrfExclude = ['/url1', '/url2'];
-//app.use(function(req, res, next) {
-//  // CSRF protection.
-//  if (_.contains(csrfExclude, req.path)) return next();
-//  csrf(req, res, next);
-//});
+var csrfExclude = ['/url1', '/url2'];
+app.use(function(req, res, next) {
+  // CSRF protection.
+  if (_.contains(csrfExclude, req.path)) return next();
+  csrf(req, res, next);
+});
 
 // time for static cache
 var hour = 3600000;
