@@ -1,13 +1,13 @@
 extends ../layout
 
 block content
-  .row
-    .col-md-6.col-md-offset-3
-      h1.text-center.space-bottom-20 Forgot your password?
-      form(role="form" method="post")
-        input(type="hidden" name="_csrf" value=_csrf)
-        .form-group
-          label Email
-          input.form-control(type="email" name="email" autofocus=true placeholder="Your email address" required)
-        .form-group
-          button.btn.btn-primary.center-block(type="submit") Reset Password
+  .text-center.space-bottom-50
+    h1.text-danger.space-bottom-20 Are you sure you want to delete your account?
+    p You can delete your account, but keep in mind this action is irreversible.
+  form(role="form" method="post")
+    input(type="hidden" name="_csrf" value=_csrf)
+    .row
+      .col-md-6.text-right
+        button.btn.btn-danger.btn-lg(type="submit") Delete my account
+      .col-md-6.text-left
+        a.btn.btn-primary.btn-lg(href="/settings/account") Cancel

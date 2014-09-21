@@ -2,6 +2,7 @@ var express = require('express');
 var passportConf = require('./passport');
 var homeController = require('../app/controllers/home_controller');
 var authController = require('../app/controllers/authentication_controller');
+var userController = require('../app/controllers/user_controller');
 
 var router = express.Router();
 
@@ -26,5 +27,17 @@ router.route('/forgot_password')
 router.route('/reset_password/:token')
   .get(authController.getResetPassword)
   .post(authController.postResetPassword);
+
+router.route('/settings/account')
+  .get(passportConf.isAuthenticated, userController.getAccount)
+  .post(passportConf.isAuthenticated, userController.postUpdateAccount);
+
+router.route('/settings/password')
+  .get(passportConf.isAuthenticated, userController.getPassword)
+  .post(passportConf.isAuthenticated, userController.postUpdatePassword);
+
+router.route('/settings/delete')
+  .get(passportConf.isAuthenticated, userController.getDelete)
+  .post(passportConf.isAuthenticated, userController.postDeleteAccount);
 
 module.exports = router;
