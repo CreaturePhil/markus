@@ -1,4 +1,5 @@
 var express = require('express');
+var passportConf = require('./passport');
 var homeController = require('../app/controllers/home_controller');
 var authController = require('../app/controllers/authentication_controller');
 
@@ -8,18 +9,22 @@ router.route('/')
   .get(homeController.getIndex);
 
 router.route('/signup')
-  .get(authController.getSignup);
+  .get(authController.getSignup)
+  .post(authController.postSignup);
 
 router.route('/login')
-  .get(authController.getLogin);
+  .get(authController.getLogin)
+  .post(authController.postLogin);
 
 router.route('/logout')
   .get(authController.getLogout);
 
 router.route('/forgot_password')
-  .get(authController.getForgotPassword);
+  .get(authController.getForgotPassword)
+  .post(authController.postForgotPassword);
 
 router.route('/reset_password/:token')
-  .get(authController.getResetPassword);
+  .get(authController.getResetPassword)
+  .post(authController.postResetPassword);
 
 module.exports = router;
