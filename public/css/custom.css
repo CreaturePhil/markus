@@ -11,3 +11,8 @@
 .space-bottom-50 {
   padding-bottom: 50px;
 }
+
+.avatar {
+  width: 360px;
+  height: auto;
+}

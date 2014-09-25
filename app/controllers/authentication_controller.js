@@ -23,9 +23,9 @@ exports.getSignup = function(req, res) {
 exports.postSignup = function(req, res, next) {
   req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
   req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('email', 'Email is not valid.').isEmail();
+  req.assert('password', 'Password must be between 4 to 300 characters long.').len(4, 300);
+  req.assert('confirmPassword', 'Passwords do not match.').equals(req.body.password);
 
   var errors = req.validationErrors();
 

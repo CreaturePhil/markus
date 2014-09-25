@@ -15,13 +15,29 @@ exports.getAccount = function(req, res) {
 
 // Update user's account information. 
 exports.postUpdateAccount = function(req, res, next) {
+  req.body.avatar && req.assert('avatar', 'Must be .png, .jpg, or .gif').regexMatch(/(https?:\/\/.*\.(?:png|jpg))/i);
+  req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
+  req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
+  req.body.website && req.assert('website', 'Invalid website url.').regexMatch(/https?:\/\/.{1,}\..{1,}/);
+  req.assert('email', 'Email is not valid.').isEmail();
+  req.assert('bio', 'Bio must be less than or equal to 160 characters.').len(0, 160);
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/settings/account');
+  }
+
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
-    user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
+    user.profile.avatar = req.body.avatar || '';
+    user.usernameIndex = req.body.username.toLowerCase(); 
+    user.username = req.body.username;
+    user.email = req.body.email;
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
+    user.profile.bio = req.body.bio || '';
 
     user.save(function(err) {
       if (err) return next(err);
