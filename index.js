@@ -43,7 +43,13 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
+app.use(expressValidator({
+  customValidators: {
+    regexMatch: function(arg, regex) {
+      return arg.match(regex);
+    }
+  }
+}));
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(session({

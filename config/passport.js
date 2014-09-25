@@ -14,15 +14,15 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// Sign in using Email and Password.
-passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
-  User.findOne({ email: email }, function(err, user) {
-    if (!user) return done(null, false, { message: 'Email ' + email + ' not found'});
+// Sign in using username and password.
+passport.use(new LocalStrategy({ usernameField: 'username' }, function(username, password, done) {
+  User.findOne({ usernameIndex: username.toLowerCase() }, function(err, user) {
+    if (!user) return done(null, false, { message: 'User ' + username + ' not found'});
     user.comparePassword(password, function(err, isMatch) {
       if (isMatch) {
         return done(null, user);
       } else {
-        return done(null, false, { message: 'Invalid email or password.' });
+        return done(null, false, { message: 'Invalid username or password.' });
       }
     });
   });

@@ -21,6 +21,8 @@ exports.getSignup = function(req, res) {
 
 // Create a new local account.
 exports.postSignup = function(req, res, next) {
+  req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
+  req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
@@ -33,14 +35,16 @@ exports.postSignup = function(req, res, next) {
   }
 
   var user = new User({
+    usernameIndex: req.body.username.toLowerCase(),
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password
   });
 
   // username that are the same as routes are ban
-  var banUsernames = ['about', 'signup', 'login'];
-  if (banUsernames.indexOf(user.username) >= 0) {
-    req.flash('errors', { msg: 'Your username cannot be that.' })
+  var banUsernames = ['signup', 'login', 'logout', 'settings'];
+  if (banUsernames.indexOf(user.usernameIndex) >= 0) {
+    req.flash('errors', { msg: 'Your username cannot be called that.' })
     return res.redirect('signup');
   }
 
@@ -49,11 +53,17 @@ exports.postSignup = function(req, res, next) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
       return res.redirect('/signup');
     }
-    user.save(function(err) {
-      if (err) return next(err);
-      req.logIn(user, function(err) {
+    User.findOne({ usernameIndex: req.body.username.toLowerCase() }, function(err, existingUser) {
+      if (existingUser) {
+        req.flash('errors', { msg: 'Account with that username already exists.' });
+        return res.redirect('/signup');
+      }
+      user.save(function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        req.logIn(user, function(err) {
+          if (err) return next(err);
+          res.redirect('/');
+        });
       });
     });
   });
@@ -74,7 +84,8 @@ exports.getLogin = function(req, res) {
 
 // Sign in using email and password.
 exports.postLogin = function(req, res, next) {
-  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('username', 'Only letters and numbers are allow in username.').regexMatch(/^[A-Za-z0-9]*$/);
+  req.assert('username', 'Username cannot be more than 30 characters.').len(1, 30);
   req.assert('password', 'Password cannot be blank').notEmpty();
 
   var errors = req.validationErrors();
