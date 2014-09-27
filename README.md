@@ -1,4 +1,4 @@
-# Markus
+# [Markus](http://markus-generator.herokuapp.com/)
 
   [Express'](https://github.com/strongloop/express) opinionated application generator and boilerplate for Node.js web applications. Inspired by [Hackathon Starter](https://github.com/sahat/hackathon-starter) and [express-generator](https://github.com/expressjs/generator).
 
