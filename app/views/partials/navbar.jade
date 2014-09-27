@@ -29,6 +29,10 @@
               i.caret
             ul.dropdown-menu
               li
+                a(href='/#{user.uid}')
+                  span.fa.fa-user
+                  | &nbsp;Profile
+              li
                 a(href='/settings/account')
                   span.fa.fa-cogs
                   | &nbsp;Account Settings

@@ -40,7 +40,7 @@ router.route('/settings/delete')
   .get(passportConf.isAuthenticated, userController.getDelete)
   .post(passportConf.isAuthenticated, userController.postDeleteAccount);
 
-router.route('*')
-  .get(userController.getProfile);
+router.route('/:user')
+  .get(userController.getUserProfile);
 
 module.exports = router;

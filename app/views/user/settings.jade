@@ -23,7 +23,7 @@ block content
               input.form-control(type="text" name="avatar" value="#{user.profile.avatar}")
               p.help-block Enter .png, .jpg, .gif image url here
               br
-              img.avatar(src="#{user.profile.avatar || user.gravatar()}")
+              img.avatar(src="#{user.profile.avatar || user.gravatar()}" alt="avatar profile")
           .form-group
             label.col-sm-2.control-label Username
             .col-sm-10

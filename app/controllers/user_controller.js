@@ -106,3 +106,24 @@ exports.postDeleteAccount = function(req, res, next) {
     res.redirect('/');
   });
 };
+
+/**
+ * Route /*
+ * --------------------
+ */
+
+// Get user profile
+exports.getUserProfile = function(req, res, next) {
+  User.findOne({ uid: req.params.user.toLowerCase() }, function(err, user) {
+    if (user) {
+      res.render('user/profile', {
+        title: user.username,
+        User: user
+      });
+    } else {
+      var err = new Error('Page Not Found');
+      err.status = 404;
+      return next(err);
+    }
+  }); 
+};
