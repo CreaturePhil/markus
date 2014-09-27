@@ -30,16 +30,13 @@
     "passport-local": "^1.0.0",
     "request": "^2.42.0",
     "serve-favicon": "~2.1.4",
-    "validator": "^3.17.1"
   },
   "devDependencies": {
-    "blessed": "^0.0.37",
     "chai": "^1.9.1",
     "gulp": "^3.8.8",
     "gulp-concat-css": "^0.1.4",
     "gulp-minify-css": "^0.3.10",
     "mocha": "^1.21.4",
-    "multiline": "^0.3.4",
     "supertest": "^0.13.0"
   }
 }
