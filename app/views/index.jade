@@ -1,4 +1,21 @@
-extends layout
+// Did not extend layout because of container div messes up landing page.
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content="")
+    meta(name="csrf-token", content=_csrf)
+    meta(name="author", content="")
+    title #{title} - Markus
+    link(rel="stylesheet" href="/css/main.min.css")
+  body
 
-block content
-  h1 Hello World!
+    include partials/navbar
+    .intro-header
+      h1 Hello World!
+      p This is an awesome generator.
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script(src="/js/bootstrap.min.js")

@@ -16,3 +16,13 @@
   width: 10em;
   height: auto;
 }
+
+.intro-header {
+  margin-top: -20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  color: #f8f8f8;
+  background: #34495e no-repeat center center;
+  background-size: cover;
+}

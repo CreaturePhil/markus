@@ -8,3 +8,7 @@ gulp.task('default', function() {
     .pipe(minifyCss())
     .pipe(gulp.dest('public/css/'));
 });
+
+gulp.task('watch', function() {
+  gulp.watch('public/css/custom.css', ['default']);
+});
