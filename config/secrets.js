@@ -40,4 +40,6 @@ module.exports = {
     password: process.env.SENDGRID_PASSWORD || 'hspassword00'
   },
 
+  banUsernames: ['signup', 'login', 'logout', 'settings']
+
 };

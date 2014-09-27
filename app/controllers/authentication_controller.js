@@ -41,9 +41,7 @@ exports.postSignup = function(req, res, next) {
     password: req.body.password
   });
 
-  // username that are the same as routes are ban
-  var banUsernames = ['signup', 'login', 'logout', 'settings'];
-  if (banUsernames.indexOf(user.uid) >= 0) {
+  if (secrets.banUsernames.indexOf(user.uid) >= 0) {
     req.flash('errors', { msg: 'Your username cannot be called that.' })
     return res.redirect('signup');
   }
