@@ -16,7 +16,7 @@ passport.deserializeUser(function(id, done) {
 
 // Sign in using username and password.
 passport.use(new LocalStrategy({ usernameField: 'username' }, function(username, password, done) {
-  User.findOne({ usernameIndex: username.toLowerCase() }, function(err, user) {
+  User.findOne({ uid: username.toLowerCase() }, function(err, user) {
     if (!user) return done(null, false, { message: 'User ' + username + ' not found'});
     user.comparePassword(password, function(err, isMatch) {
       if (isMatch) {

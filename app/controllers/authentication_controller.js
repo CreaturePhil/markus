@@ -35,7 +35,7 @@ exports.postSignup = function(req, res, next) {
   }
 
   var user = new User({
-    usernameIndex: req.body.username.toLowerCase(),
+    uid: req.body.username.toLowerCase(),
     username: req.body.username,
     email: req.body.email,
     password: req.body.password
@@ -43,7 +43,7 @@ exports.postSignup = function(req, res, next) {
 
   // username that are the same as routes are ban
   var banUsernames = ['signup', 'login', 'logout', 'settings'];
-  if (banUsernames.indexOf(user.usernameIndex) >= 0) {
+  if (banUsernames.indexOf(user.uid) >= 0) {
     req.flash('errors', { msg: 'Your username cannot be called that.' })
     return res.redirect('signup');
   }
@@ -53,7 +53,7 @@ exports.postSignup = function(req, res, next) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
       return res.redirect('/signup');
     }
-    User.findOne({ usernameIndex: req.body.username.toLowerCase() }, function(err, existingUser) {
+    User.findOne({ uid: req.body.username.toLowerCase() }, function(err, existingUser) {
       if (existingUser) {
         req.flash('errors', { msg: 'Account with that username already exists.' });
         return res.redirect('/signup');

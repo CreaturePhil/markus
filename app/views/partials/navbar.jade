@@ -24,7 +24,7 @@
         else
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
-              img(src='#{user.profile.picture || user.gravatar(60)}' alt="Profile Pic")
+              img(src='#{user.profile.avatar || user.gravatar(60)}' alt="Profile Pic")
               | #{user.username || user.email || user.id}&nbsp;
               i.caret
             ul.dropdown-menu
