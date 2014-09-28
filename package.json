@@ -1,7 +1,7 @@
 {
   "name": "markus",
   "description": "Express' opinionated application generator and boilerplate for Node.js web applications.",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "Philip La <birkal@outlook.com>",
   "keywords": [
     "express",
