@@ -110,17 +110,17 @@ function createApplicationAt(path) {
       write(path + '/app/models/User.js', userModel);
     });
     mkdir(path + '/app/views', function() {
-      mkdir('/app/views/authentication', function() {
+      mkdir(path + '/app/views/authentication', function() {
         write(path + '/app/views/authentication/signup.jade', signup);
         write(path + '/app/views/authentication/login.jade', login);
         write(path + '/app/views/authentication/forgot_password.jade', forgotPw);
         write(path + '/app/views/authentication/reset_password.jade', resetPw);
       });
-      mkdir('/app/views/partials', function() {
+      mkdir(path + '/app/views/partials', function() {
         write(path + '/app/views/partials/flash.jade', flash);
         write(path + '/app/views/partials/navbar.jade', navbar);
       });
-      mkdir('/app/views/user', function() {
+      mkdir(path + '/app/views/user', function() {
         write(path + '/app/views/user/delete_account.jade', deleteAcc);
         write(path + '/app/views/user/profile.jade', profile);
         write(path + '/app/views/user/settings.jade', settings);
@@ -136,12 +136,16 @@ function createApplicationAt(path) {
       write(path + '/config/secrets.js', secrets); 
     });
 
-    fs.copy('/../templates/public', path, function(err){
-      console.log('   \033[36mcreate\033[0m : ' + '/public');
+    mkdir(path + '/public', function() {
+      fs.copy('/../templates/public', path + '/public', function(err){
+        console.log('   \033[36mcreate\033[0m : ' + '/public');
+      });
     });
 
-    fs.copy('/../templates/test', path, function(err){
-      console.log('   \033[36mcreate\033[0m : ' + '/test');
+    mkdir(path + '/test', function() {
+      fs.copy('/../templates/test', path + '/test', function(err){
+        console.log('   \033[36mcreate\033[0m : ' + '/test');
+      });
     });
 
     var pkg = {
