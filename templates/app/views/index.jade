@@ -29,13 +29,27 @@ html
             | <a href="https://github.com/expressjs/generator" target="_blank">express-generator</a>.
     .row
       .col-md-8.col-md-offset-2.text-center
+        br
+        a(href="https://github.com/CreaturePhil/markus" target="_blank")
+          img(src="https://img.shields.io/npm/v/markus.svg" alt="NPM Version")
+          | &nbsp;&nbsp;
+        a(href="https://www.npmjs.org/package/markus" target="_blank")
+          img(src="https://img.shields.io/npm/dm/markus.svg" alt="NPM Downloads")
+          | &nbsp;&nbsp;
+        a(href="https://david-dm.org/creaturephil/markus" target="_blank")
+          img(src="https://david-dm.org/creaturephil/markus.svg" alt="Dependency Status")
+          | &nbsp;&nbsp;
+        a(href="https://travis-ci.org/CreaturePhil/markus" target="_blank")
+          img(src="https://travis-ci.org/CreaturePhil/markus.svg" alt="Build Status")
+          | &nbsp;&nbsp;
+        hr
         h2 Quick Start
         p The quickest way to get started with markus is to utilize the executable <strong>markus(1)</strong> to generate an application as shown below:
 
         p Create the app:
         .well.well-lg.
           $ npm install -g markus<br>
-          $ markus /tmp/foo && cd /tmp/foo
+          $ markus myproject && cd myproject
         p Install dependencies:
         .well.well-lg $ npm install
         p Run your app:
@@ -207,6 +221,17 @@ html
             tr
               td supertest
               td HTTP assertion library.
+    hr
+    .row
+      .col-md-8.col-md-offset-2.text-center.text-muted
+        p Designed and built with all the love in the world by <a href="https://twitter.com/CreaturePhil" target="_blank">@CreaturePhil</a>.
+        p Code licensed under <a href="https://github.com/CreaturePhil/markus/blob/master/LICENSE" target="_blank">MIT</a>.
+        p.
+          <a href="https://github.com/creaturephil/markus">GitHub</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          <a href="https://github.com/creaturephil/markus/issues">Issues</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          <a href="https://github.com/CreaturePhil/markus/releases">Releases</a>
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="/js/bootstrap.min.js")
