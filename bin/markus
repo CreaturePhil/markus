@@ -138,13 +138,13 @@ function createApplicationAt(path) {
     });
 
     mkdir(path + '/public', function() {
-      wrench.copyDirSyncRecursive('/../templates/public', path + '/public', {
+      wrench.copyDirSyncRecursive(__dirname + '/../templates/public', path + '/public', {
         forceDelete: true
       });
     });
 
     mkdir(path + '/test', function() {
-      wrench.copyDirSyncRecursive('/../templates/test', path + '/test', {
+      wrench.copyDirSyncRecursive(__dirname + '/../templates/test', path + '/test', {
         forceDelete: true
       });
     });
