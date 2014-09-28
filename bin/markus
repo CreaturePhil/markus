@@ -98,7 +98,7 @@ function createApplicationAt(path) {
     console.log('     $ cd %s && npm install', path);
     console.log();
     console.log('   run the app:');
-    console.log('     $ DEBUG=' + app_name + ' ./bin/www');
+    console.log('     $ npm start');
     console.log();
   });
 
@@ -113,15 +113,21 @@ function createApplicationAt(path) {
       write(path + '/app/models/User.js', userModel);
     });
     mkdir(path + '/app/views', function() {
-      write(path + '/app/views/authentication/signup.jade', signup);
-      write(path + '/app/views/authentication/login.jade', login);
-      write(path + '/app/views/authentication/forgot_password.jade', forgotPw);
-      write(path + '/app/views/authentication/reset_password.jade', resetPw);
-      write(path + '/app/views/partials/flash.jade', flash);
-      write(path + '/app/views/partials/navbar.jade', navbar);
-      write(path + '/app/views/user/delete_account.jade', deleteAcc);
-      write(path + '/app/views/user/profile.jade', profile);
-      write(path + '/app/views/user/settings.jade', settings);
+      mkdir('/app/views/authentication', function() {
+        write(path + '/app/views/authentication/signup.jade', signup);
+        write(path + '/app/views/authentication/login.jade', login);
+        write(path + '/app/views/authentication/forgot_password.jade', forgotPw);
+        write(path + '/app/views/authentication/reset_password.jade', resetPw);
+      });
+      mkdir('/app/views/partials', function() {
+        write(path + '/app/views/partials/flash.jade', flash);
+        write(path + '/app/views/partials/navbar.jade', navbar);
+      });
+      mkdir('/app/views/user', function() {
+        write(path + '/app/views/user/delete_account.jade', deleteAcc);
+        write(path + '/app/views/user/profile.jade', profile);
+        write(path + '/app/views/user/settings.jade', settings);
+      });
       write(path + '/app/views/error.jade', error);
       write(path + '/app/views/index.jade', index);
       write(path + '/app/views/layout.jade', layout);
