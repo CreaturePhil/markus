@@ -1,7 +1,7 @@
 {
   "name": "markus",
   "description": "Express' opinionated application generator and boilerplate for Node.js web applications.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Philip La <birkal@outlook.com>",
   "keywords": [
     "express",
@@ -19,8 +19,8 @@
   "homepage": "http://markus-generator.herokuapp.com",
   "dependencies": {
     "commander": "1.3.2",
-    "fs-extra": "^0.12.0",
-    "mkdirp": "0.5.0"
+    "mkdirp": "0.5.0",
+    "wrench": "^1.5.8"
   },
   "main": "bin/markus",
   "preferGlobal": true,

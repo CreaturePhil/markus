@@ -3,7 +3,7 @@
 var program = require('commander');
 var mkdirp = require('mkdirp');
 var os = require('os');
-var fs = require('fs-extra');
+var fs = require('fs');
 var path = require('path');
 
 var pkg = require('../package.json');
@@ -137,14 +137,14 @@ function createApplicationAt(path) {
     });
 
     mkdir(path + '/public', function() {
-      fs.copy('/../templates/public', path + '/public', function(err){
-        console.log('   \033[36mcreate\033[0m : ' + '/public');
+      wrench.copyDirSyncRecursive('/../templates/public', path + '/public', {
+        forceDelete: true
       });
     });
 
     mkdir(path + '/test', function() {
-      fs.copy('/../templates/test', path + '/test', function(err){
-        console.log('   \033[36mcreate\033[0m : ' + '/test');
+      wrench.copyDirSyncRecursive('/../templates/test', path + '/test', {
+        forceDelete: true
       });
     });
 
