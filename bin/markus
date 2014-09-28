@@ -136,11 +136,11 @@ function createApplicationAt(path) {
       write(path + '/config/secrets.js', secrets); 
     });
 
-    ncp('/../templates/public', path, function (err) {
+    fs.copy('/../templates/public', path, function(err){
       console.log('   \033[36mcreate\033[0m : ' + '/public');
     });
 
-    ncp('/../templates/test', path, function (err) {
+    fs.copy('/../templates/test', path, function(err){
       console.log('   \033[36mcreate\033[0m : ' + '/test');
     });
 
