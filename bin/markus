@@ -62,6 +62,7 @@ var secrets = fs.readFileSync(__dirname + '/../templates/config/secrets.js', 'ut
 // Main files
 var app = fs.readFileSync(__dirname + '/../templates/index.js', 'utf-8');
 var gulpfile = fs.readFileSync(__dirname + '/../templates/gulpfile.js', 'utf-8');
+var gitignore = fs.readFileSync(__dirname + '/../templates/.gitignore', 'utf-8');
 
 // Generate application
 
@@ -185,9 +186,10 @@ function createApplicationAt(path) {
         'mocha': '^1.21.4',
         'supertest': '^0.13.0'
       }
-    }
+    };
 
     write(path + '/package.json', JSON.stringify(pkg, null, 2));
+    write(path + '/.gitignore', gitignore);
     write(path + '/gulpfile.js', gulpfile);
     write(path + '/index.js', app);
     mkdir(path + '/bin', function() {
