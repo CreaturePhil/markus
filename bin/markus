@@ -190,7 +190,7 @@ function createApplicationAt(path) {
     write(path + '/package.json', JSON.stringify(pkg, null, 2));
     write(path + '/gulpfile.js', gulpfile);
     write(path + '/index.js', app);
-    mkdir(path + '/bin', function(){
+    mkdir(path + '/bin', function() {
       www = www.replace('{name}', app_name);
       write(path + '/bin/www', www, 0755);
     });
