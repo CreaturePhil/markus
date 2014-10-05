@@ -115,7 +115,7 @@ exports.postDeleteAccount = function(req, res, next) {
 // Get user profile
 exports.getUserProfile = function(req, res, next) {
   User.findOne({ uid: req.params.user.toLowerCase() }, function(err, user) {
-    if (err) return next(err);
+    if (err || !user) return next(err);
     res.render('user/profile', {
       title: user.username,
       User: user
